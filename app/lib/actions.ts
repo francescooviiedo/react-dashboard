@@ -14,6 +14,7 @@ export async function authenticate(
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {
+      //@ts-expect-error
       switch (error.type) {
         case 'CredentialsSignin':
           return 'Invalid credentials.';
@@ -82,6 +83,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
+    console.error(error);
     return {
       message: 'Database Error: Failed to Create Invoice.',
     };
